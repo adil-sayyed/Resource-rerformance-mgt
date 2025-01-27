@@ -41,6 +41,12 @@
 .bg-c-green {
   background: var(--color-green);
 }
+.bg-c-red {
+  background: var(--color-dark-red);
+}
+.bg-c-purple {
+  background: purple;
+}
 
 .bg-c-gray-gradient {
   background: var(--bg-gray-gradient);
@@ -278,7 +284,9 @@ body .cm {
   font-weight: var(--font-weight-400);
   font-size: var(--font-size-14);
 }
-
+.bg-c-box{
+  background-color: #f9f5e0;
+}
 .cm .main {
   background: url("/images/main-bg.png");
   background-size: cover;

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/custom.css" />
     <link rel="stylesheet" href="styles/root.css" />
     <link rel="stylesheet" href="styles/common.css" />
-    <link rel="stylesheet" href="styles/tour.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body class="h-screen w-full">
     <main class="flex w-full h-full cm lightapp">
@@ -346,7 +346,7 @@
                     <div class="flex-grow md:w-1/2">
                         <div class="flex items-center justify-end">
                             <div>
-                                <button id="buttonModalOpen"
+                                <button id="serverOpen"
                                 class="flex items-center justify-center gap-2 bg-c-black text-c-yellow px-3 sm:px-4 py-1 sm:py-1.5 rounded-md" onclick="showModal()"
                                 >
                                 <i class="ri-add-circle-fill"></i
@@ -359,23 +359,290 @@
 
                 <!-- Main section -->
                 <div class="">
-                    <div class="py-4 px-6">
+                    <div class="py-2 px-6">
                         <!-- Button section -->
-                        <div class="flex flex-wrap gap-6 md:gap-10 justify-start md:justify-center">
-                            <button type="button" onclick="showTab('bk-Reports')" class="uspr-tab-control"   data-tab="bk-Reports">Reports</button>
+                        <div class="flex flex-wrap gap-6 md:gap-10 justify-start md:justify-start">
+                            <button type="button" onclick="showTab('bk-Reports')" class="uspr-tab-control active"   data-tab="bk-Reports">Reports</button>
                             <button type="button" onclick="showTab('bk-Settings')" class="uspr-tab-control"  data-tab="bk-Settings">Settings</button>
                         </div>
                     </div>
 
                 </div>
                 <!-- Form Setion -->
-                <div class="py-4 px-6">
-                    <div class="tab-content media-preview-main" id="bk-Reports">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium veniam, perspiciatis cumque corporis totam nulla aliquam deserunt tempore rem at maiores praesentium numquam molestiae nobis illum, nemo esse temporibus architecto!</p>
-                    </div>
+                <div class="px-2 space-y-2 overflow-y-scroll overflow-hidden scroll">
 
+                    <!-- Reports Content -->
+                    <div class="tab-content media-preview-main active" id="bk-Reports">
+                      <div class="p-4 space-y-4">
+
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+                          <!-- CPU Card -->
+                          <div class="bg-white border h-auto rounded-md shadow-md">
+                            <div class="border-b py-2 bg-c-gray-2 rounded-tr-lg rounded-tl-lg px-4">
+                              <span class="text-white">CPU 10%</span>
+                            </div>
+                            <div class="py-10 px-4 flex justify-center items-center items-center">
+                              <div class="h-24  w-full border border-black rounded bg-c-box"></div>
+                            </div>
+                          </div>
+                          <!-- Memory Card  -->
+                          <div class="bg-white border h-full rounded-md  shadow-md">
+                            <div class="border-b py-2 bg-c-gray-2 rounded-tr-lg rounded-tl-lg px-4">
+                              <span class="text-white">Memory 752 MB / 950 MB</span>
+                            </div>
+                            <div class="py-10 px-4 flex justify-center items-center">
+                              <div class="h-24  w-full border border-black rounded bg-c-box"></div>
+                            </div>
+                          </div>
+                          <!-- Space Card -->
+                          <div class="bg-white border h-full rounded-md shadow-md">
+                            <div class="border-b py-2 bg-c-gray-2 rounded-tr-lg rounded-tl-lg px-4">
+                              <span class="text-white">Storage 8GB / 10GB</span>
+                            </div>
+                            <div class="col-span-1 md:col-span-1 border bg-white rounded-md">
+                              <div id="file-usage-ratio" class="p-1 flex justify-center items-center w-full h-44">
+                                <canvas id="usage-storage-donut"></canvas>  
+                              </div>
+
+                          </div>
+                          </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                          <!-- Application Usage -->
+                          <div class="bg-white border w- h-full shadow-md lg:row-span-2">
+                            <div class="border bg-c-gray-2 rounded-tr-lg rounded-tl-lg py-2 px-4">
+                              <h2 class="text-white">Application usage</h2>                            
+                            </div>
+                            <div class="px-2 py-1">
+                              <select class="w-full mb-1 border border-gray-300 rounded p-2">
+                                <option class="">Top 10 users making request</option>
+                                <option class="">Making request</option>
+                              </select>
+                            </div>
+                            <ul class="divide-y divide-gray-300">
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">42</span>
+                              </li>
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">54</span>
+                              </li>
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">56</span>
+                              </li>
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">86</span>
+                              </li>
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">12</span>
+                              </li>
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">23</span>
+                              </li>
+                              <li class="flex justify-between items-center py-1 px-3">
+                                <div class="flex items-center space-x-4">
+                                  <img src="images/TimMacdonald.png" alt="User" class="w-10 h-10 rounded-full">
+                                  <div>
+                                    <p class="font-medium text-gray-900">Tim Macdonald</p>
+                                    <p class="text-sm text-gray-500">tim@yahoo.com</p>
+                                  </div>
+                                </div>
+                                <span class="font-bold text-gray-700">42</span>
+                              </li>
+                            
+                              
+                            </ul>
+                            
+                          </div>
+                      
+                          <div class="lg:col-span-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                            <!-- Queues -->
+                            <div class="bg-white border w-full h-full shadow-md">
+                              <div class="border bg-c-gray-2 rounded-tr-lg rounded-tl-lg py-2 px-4">
+                                <h2 class="text-white">Queues</h2>
+                              </div>
+                              <div class="flex ">
+                                <div class="w-2/6  p-4 text-sm">
+                                  <div class="flex items-center space-x-2 py-2">
+                                    <p class="w-4 h-4 bg-c-dark-gray rounded-full"></p>
+                                    <p>Queued</p>
+                                  </div>
+                                  <div class="flex items-center space-x-2 py-2">
+                                    <p class="w-4 h-4 bg-c-yellow rounded-full"></p>
+                                    <p>Processing</p>
+                                  </div>
+                                  <div class="flex items-center space-x-2 py-2">
+                                    <p class="w-4 h-4 bg-c-purple rounded-full"></p>
+                                    <p>Processed</p>
+                                  </div>
+                                  <div class="flex items-center space-x-2 py-2">
+                                    <p class="w-4 h-4 bg-c-green rounded-full"></p>
+                                    <p>Released</p>
+                                  </div>
+                                  <div class="flex items-center space-x-2 py-2">
+                                    <p class="w-4 h-4 bg-c-red rounded-full"></p>
+                                    <p>Failed</p>
+                                  </div>
+                                </div>
+                                <div class="flex flex-col w-full ">
+                                  <div class="flex-1 p-4">
+                                    <p class=" font-bold">Default</p>
+                                    <div class="py-2">
+                                      <div class="h-16  w-full border border-black rounded bg-c-box"></div>
+                                    </div>
+                                  </div>
+                                  <div class="flex-1 p-4">
+                                    <p class=" font-bold">High</p>
+                                    <div class="py-2">
+                                      <div class="h-16  w-full border border-black rounded bg-c-box"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                      
+                            <!-- Cache -->
+                            <div class="bg-white border w-full h-full shadow-md">
+                              <div class="border bg-c-gray-2 rounded-tr-lg rounded-tl-lg py-2 px-4">
+                                <h2 class="text-white">Cache</h2>
+                              </div>
+                              <div class="flex flex-grow gap-8 px-4 py-2">
+                                <p class="text-sm"><span class="font-medium text-2xl">1235</span> hits</p>
+                                <p class="text-sm"><span class="font-medium text-2xl">284</span> misses</p>
+                                <p class="text-sm"><span class="font-medium text-2xl">80%</span> hit rate</p>
+                              </div>
+                              
+                              <div class="p-4">
+                                <table class="w-full mt-4 text-sm ">
+                                  <thead>
+                                    <tr class="py-2">
+                                      <th class="text-left font-normal text-md ">Key</th>
+                                      <th class="text-left  font-normal text-md pl-8">Hits</th>
+                                      <th class="text-left font-normal text-md ">Misses</th>
+                                      <th class="text-right font-normal text-md ">Hit Rate</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr class="py-2">
+                                      <td class="text-left  py-2 font-medium ">flight:2</td>
+                                      <td class="text-left  py-2 font-medium pl-8">125</td>
+                                      <td class="text-left  py-2 font-medium ">12</td>
+                                      <td class="text-right  py-2 font-medium ">50.75%</td>
+                                    </tr>
+                                    <tr>
+                                      <td colspan="4"><hr class="border-t border-gray-300"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-left py-2 font-medium ">flight:2</td>
+                                    <td class="text-left  py-2 font-medium pl-8">125</td>
+                                    <td class="text-left py-2 font-medium ">12</td>
+                                    <td class="text-right py-2 font-medium ">50.75%</td>
+                                  </tr>
+                                    <tr>
+                                      <td colspan="4"><hr class="border-t border-gray-300"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="text-left py-2 font-medium ">flight:2</td>
+                                    <td class="text-left  py-2 font-medium pl-8">125</td>
+                                    <td class="text-left py-2 font-medium ">12</td>
+                                    <td class="text-right py-2 font-medium ">50.75%</td>
+                                  </tr>
+                                      <tr>
+                                        <td colspan="4"><hr class="border-t border-gray-300"></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-left py-2 font-medium ">flight:2</td>
+                                      <td class="text-left  py-2 font-medium pl-8">125</td>
+                                      <td class="text-left py-2 font-medium ">12</td>
+                                      <td class="text-right py-2 font-medium ">50.75%</td>
+                                    </tr>
+                                      <tr>
+                                        <td colspan="4"><hr class="border-t border-gray-300"></td>
+                                    </tr>
+                                    <tr>
+                                      <td class="text-left py-2 font-medium ">flight:2</td>
+                                      <td class="text-left  py-2 font-medium pl-8">125</td>
+                                      <td class="text-left py-2 font-medium ">12</td>
+                                      <td class="text-right py-2 font-medium ">50.75%</td>
+                                    </tr>
+                                    
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                      
+                          <!-- Slow Queries -->
+                          <div class="bg-white shadow-md rounded-lg p-4 lg:col-span-3">
+                            <h2 class="text-lg font-semibold mb-4">Slow queries</h2>
+                            <table class="w-full text-sm">
+                              <thead>
+                                <tr>
+                                  <th class="text-left">Query</th>
+                                  <th class="text-right">Count</th>
+                                  <th class="text-right">Slowest</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="truncate">&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;?xml version="1.0" encoding="utf-8"?&gt; app/Http/Controllers/flight.php:22</td>
+                                  <td class="text-right">345</td>
+                                  <td class="text-right">2054ms</td>
+                                </tr>
+                                <!-- Repeat rows as needed -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+
+                    <!-- Settings Content -->
                     <div class="tab-content media-preview-main" id="bk-Settings">
-                        <div class=" py-4">
+                        <div class="icons py-4">
                             <table class="w-full cs-table-container ur-table-container"> 
                                 <thead class="h-14">
                                 <tr class="bg-c-dark-gray">
@@ -404,7 +671,7 @@
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">(IP address)</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">Lorem ipsum</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3 flex flex-grow gap-4">
-                                        <button class="text-2xl"><i class="ri-pie-chart-fill"></i></button>
+                                        <button class="text-2xl thresholdOpen"><i class="ri-pie-chart-fill"></i></button>
                                         <button class="text-2xl"><i class="ri-edit-2-line"></i></button>
                                         <button class="text-2xl"><i class="ri-delete-bin-line"></i></button>
                                     </td>
@@ -417,7 +684,7 @@
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">(IP address)</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">Lorem ipsum</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3 flex flex-grow gap-4">
-                                        <button class="text-2xl"><i class="ri-pie-chart-fill"></i></button>
+                                        <button class="text-2xl thresholdOpen"><i class="ri-pie-chart-fill"></i></button>
                                         <button class="text-2xl"><i class="ri-edit-2-line"></i></button>
                                         <button class="text-2xl"><i class="ri-delete-bin-line"></i></button>
                                     </td>
@@ -430,7 +697,7 @@
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">(IP address)</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">Lorem ipsum</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3 flex flex-grow gap-4">
-                                        <button class="text-2xl"><i class="ri-pie-chart-fill"></i></button>
+                                        <button class="text-2xl thresholdOpen"><i class="ri-pie-chart-fill"></i></button>
                                         <button class="text-2xl"><i class="ri-edit-2-line"></i></button>
                                         <button class="text-2xl"><i class="ri-delete-bin-line"></i></button>
                                     </td>
@@ -443,7 +710,7 @@
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">(IP address)</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3">Lorem ipsum</td>
                                     <td class="text-left pl-3 pr-3 md:pr-0 py-3 flex flex-grow gap-4">
-                                        <button class="text-2xl"><i class="ri-pie-chart-fill"></i></button>
+                                        <button class="text-2xl thresholdOpen"><i class="ri-pie-chart-fill"></i></button>
                                         <button class="text-2xl"><i class="ri-edit-2-line"></i></button>
                                         <button class="text-2xl"><i class="ri-delete-bin-line"></i></button>
                                     </td>
@@ -456,103 +723,246 @@
             </div>
         </div>
         
-        <!-- Button Modal -->
-        <!-- <div id="buttonModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">Button Modal</h2>
-                <span id="buttonModalClose" class="text-gray-500 text-2xl cursor-pointer hover:text-gray-700">&times;</span>
-            </div>
-            <p class="text-gray-600">This is the Button Modal. Customize me!</p>
-            </div>
-        </div> -->
-
-        <div id="buttonModal" role="dialog" class="fixed hidden inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <!-- Server details Modal -->
+        
+        <div id="serverModal" role="dialog" class="fixed hidden inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div id="add-modal" class="bg-white rounded-xl overflow-hidden shadow-lg max-w-xl w-full modal-content">
                 <div class="flex py-3 px-5 border-b border-gray-400 justify-between items-center">
                     <h2 class="text-lg font-medium" id="edit-modal-title">Server details</h2>
-                    <button type="button" id="buttonModalClose" class="hover-text-c-yellow">
+                    <button type="button" id="serverClose" class="hover-text-c-yellow">
                         <i class="ri-close-circle-fill text-xl"></i>
                     </button>
                 </div>
                 <div class="p-5">
                     <form class="space-y-4 text-sm">
                         <div class="flex flex-wrap w-full gap-y-4 items-center">
-                            <label for="name" class="w-1/3 font-semibold">Server name: <span class="text-red-500">*</span></label>
+                            <label for="name" class="w-full md:w-1/3 font-semibold">Server name: <span class="text-red-500">*</span></label>
                             <input type="text" required name="name" id="name"
-                                class="bg-gray-50 ml-auto w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 ml-auto w-full md:w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Input server name" />
-                            <label for="name" class="w-1/3 font-semibold">SSH/DNS name: <span class="text-red-500">*</span></label>
+                            <label for="name" class="w-full md:w-1/3 font-semibold">SSH/DNS name: <span class="text-red-500">*</span></label>
                             <input type="text" required name="name" id="name"
-                                class="bg-gray-50 ml-auto w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 ml-auto w-full md:w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Input SSH/DNS name" />
-                            <label for="name" class="w-1/3 font-semibold">Directory: <span class="text-red-500">*</span></label>
+                            <label for="name" class="w-full md:w-1/3 font-semibold">Directory: <span class="text-red-500">*</span></label>
                             <input type="text" required name="name" id="name"
-                                class="bg-gray-50 ml-auto w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 ml-auto w-full md:w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 placeholder="Input directory" />
-                            <label for="name" class="w-1/3 font-semibold">Description:</label>
+                            <label for="name" class="w-full md:w-1/3 font-semibold">Description:</label>
                             <input type="text" required name="name" id="name"
-                                class="bg-gray-50 ml-auto w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                class="bg-gray-50 ml-auto w-full md:w-2/3 border border-gray-300 text-gray-900 text-sm rounded-xl block p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 />   
                         </div>
                         <div class="flex justify-end mt-3">
                             <button
-                                class="bg-c-black hover-bg-c-black text-white rounded-full w-32 py-2 text-sm">Submit</button>
+                                class="bg-c-black hover-bg-c-black text-white rounded-full w-32 py-2 text-sm hover-text-c-yellow">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Icon Modal -->
-        <div id="iconModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-4/5 max-w-md">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-semibold">Icon Modal</h2>
-                <span id="iconModalClose" class="text-gray-500 text-2xl cursor-pointer hover:text-gray-700">&times;</span>
-            </div>
-            <p class="text-gray-600">This is the Icon Modal. Customize me!</p>
-            </div>
-        </div>
+        <!-- Threshold configuration Modal -->
+        <div id="thresholdModal" role="dialog" class="fixed hidden inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div id="add-modal" class="bg-white rounded-xl overflow-hidden shadow-lg max-w-xl w-full modal-content">
+              <div class="flex py-3 px-5 border-b border-gray-400 justify-between items-center">
+                  <h2 class="text-lg font-medium" id="edit-modal-title">Threshold configuration form</h2>
+                  <button type="button" id="thresholdClose" class="hover-text-c-yellow">
+                      <i class="ri-close-circle-fill text-xl"></i>
+                  </button>
+              </div>
+              <div class="overflow-y-auto scroll" style="max-height: calc(100vh - 8rem)">
+                <div class="p-5">
+                  <form class="space-y-6 text-sm">
+                    <div class="flex flex-wrap w-full gap-y-2 items-center">
+                      <label for="title" class="w-full md:w-1/4 font-bold text-c-black">Server Selector:</label>
+                      <div class="relative w-full md:w-3/4">
+                        <input
+                          type="text"
+                          required
+                          name="server-selector"
+                          id="server-selector"
+                          class="w-full bg-c-lighten-gray border border-gray-300 text-gray-900 textsize rounded-xl pl-4 pr-20 p-2 placeholder-gray-400 focus:outline-none"
+                          placeholder="Please select server"
+                        />
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 border-l-2 border-gray-300">
+                          <i class="ri-arrow-drop-down-line ml-1 ri-lg text-2xl"></i>
+                        </div>
+                      </div>
+                    </div>
+                
+                    
+                    <div class="flex flex-wrap w-full gap-y-2 items-center">
+                      <label for="statistic-selector" class="w-full md:w-1/4 font-bold text-c-black">Statistic Selector:</label>
+                      <div class="relative w-full md:w-3/4">
+                        <input
+                          type="text"
+                          required
+                          name="statistic-selector"
+                          id="statistic-selector"
+                          class="w-full bg-c-lighten-gray border border-gray-300 text-gray-900 textsize rounded-xl pl-4 pr-20 p-2 placeholder-gray-400 focus:outline-none"
+                          placeholder="Please enter nickname"
+                        />
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 border-l-2 border-gray-300">
+                          <i class="ri-arrow-drop-down-line ml-1 ri-lg text-2xl"></i>
+                        </div>
+                      </div>
+                    </div>
+                
+                    
+                    <div class="flex flex-wrap w-full gap-y-2 items-center">
+                      <label for="threshold-value" class="w-full md:w-1/4 font-bold text-c-black">Threshold Value:</label>
+                      <div class="relative w-full md:w-3/4">
+                        <input
+                          type="text"
+                          required
+                          name="threshold-value"
+                          id="threshold-value"
+                          class="w-full bg-c-lighten-gray border border-gray-300 text-gray-900 textsize rounded-xl pl-4 pr-20 p-2 placeholder-gray-400 focus:outline-none"
+                          placeholder="Threshold value"
+                        />
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 border-l-2 border-gray-300">
+                          <i class="ri-arrow-drop-down-line ml-1 ri-lg text-2xl"></i>
+                        </div>
+                      </div>
+                    </div>
+                
+                    
+                    <div class="flex flex-wrap w-full gap-y-2 items-center">
+                      <label for="threshold-type" class="w-full md:w-1/4 font-bold text-c-black">Threshold Type:</label>
+                      <div class="relative w-full md:w-3/4">
+                        <input
+                          type="text"
+                          required
+                          name="threshold-type"
+                          id="threshold-type"
+                          class="w-full bg-c-lighten-gray border border-gray-300 text-gray-900 textsize rounded-xl pl-4 pr-20 p-2 placeholder-gray-400 focus:outline-none"
+                          placeholder="Threshold type"
+                        />
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 border-l-2 border-gray-300">
+                          <i class="ri-arrow-drop-down-line ml-1 ri-lg text-2xl"></i>
+                        </div>
+                      </div>
+                    </div>
+                
+                    
+                    <div class="flex flex-wrap w-full gap-y-2 items-center">
+                      <label for="notification-format" class="w-full md:w-1/4 font-bold text-c-black">Notification Format:</label>
+                      <div class="relative w-full md:w-3/4">
+                        <input
+                          type="text"
+                          required
+                          name="notification-format"
+                          id="notification-format"
+                          class="w-full bg-c-lighten-gray border border-gray-300 text-gray-900 textsize rounded-xl pl-4 pr-20 p-2 placeholder-gray-400 focus:outline-none"
+                          placeholder="Notification format"
+                        />
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-2 border-l-2 border-gray-300">
+                          <i class="ri-arrow-drop-down-line ml-1 ri-lg text-2xl"></i>
+                        </div>
+                      </div>
+                    </div>
+                
+                    
+                    <div class="flex flex-wrap w-full gap-y-2 items-center cs">
+                      <label for="enable-notification" class="w-full md:w-1/4 font-bold text-c-black">Enable Notification:</label>
+                      <div class="w-full md:w-3/4 flex gap-4 items-center">
+                        <label class="flex items-center gap-2">
+                          <input type="checkbox" class="d-checkbox" checked />
+                          <span>Activate</span>
+                        </label>
+                        <label class="flex items-center gap-2">
+                          <input type="checkbox" class="d-checkbox" />
+                          <span>Deactivate</span>
+                        </label>
+                      </div>
+                    </div>
+                
+                    
+                    <div class="flex justify-end mt-4">
+                      <button
+                        class="bg-c-black hover:bg-c-black text-white rounded-full w-32 py-2 text-sm hover-text-c-yellow"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              
+              
+          </div>
+      </div>
     </main>
+    <script defer>
+      // for doughnut 
+      const ctx = document.getElementById('usage-storage-donut');
 
+      new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+              labels: [
+                  'Space left',
+                  'Space Use'
+              ],
+              datasets: [{
+                  data: [150, 300],
+                  backgroundColor: [
+                    'rgb(255, 205, 86)',
+                    'rgb(0,0,0)'
+                  ],
+                  hoverOffset: 2
+              }]
+          },
+          options: {
+              plugins: {
+                  title: "File Usage Ratio",
+              }
+          }
+      });
+    </script>
     <script>
-        // Button Modal
-        const buttonModal = document.getElementById('buttonModal');
-        const buttonModalOpen = document.getElementById('buttonModalOpen');
-        const buttonModalClose = document.getElementById('buttonModalClose');
+      // Server details Modal
+      const buttonModal = document.getElementById('serverModal');
+      const buttonModalOpen = document.getElementById('serverOpen');
+      const buttonModalClose = document.getElementById('serverClose');
     
-        buttonModalOpen.addEventListener('click', () => {
-          buttonModal.classList.remove('hidden');
-        });
+      buttonModalOpen.addEventListener('click', () => {
+        buttonModal.classList.remove('hidden');
+      });
     
-        buttonModalClose.addEventListener('click', () => {
-          buttonModal.classList.add('hidden');
-        });
+      buttonModalClose.addEventListener('click', () => {
+        buttonModal.classList.add('hidden');
+      });
     
-        // Icon Modal
-        const iconModal = document.getElementById('iconModal');
-        const iconModalOpen = document.getElementById('iconModalOpen');
-        const iconModalClose = document.getElementById('iconModalClose');
+      // Threshold configuration (for multiple triggers)
+      const iconModal = document.getElementById('thresholdModal');
+      const iconModalOpenButtons = document.querySelectorAll('.thresholdOpen'); // Use class to select multiple triggers
+      const iconModalClose = document.getElementById('thresholdClose');
     
-        iconModalOpen.addEventListener('click', () => {
+      // Add click event to all elements with the "thresholdOpen" class
+      iconModalOpenButtons.forEach((button) => {
+        button.addEventListener('click', () => {
           iconModal.classList.remove('hidden');
         });
+      });
     
-        iconModalClose.addEventListener('click', () => {
+      // Close icon modal
+      iconModalClose.addEventListener('click', () => {
+        iconModal.classList.add('hidden');
+      });
+    
+      // Close modal when clicking outside
+      window.addEventListener('click', (event) => {
+        if (event.target === buttonModal) {
+          buttonModal.classList.add('hidden');
+        }
+        if (event.target === iconModal) {
           iconModal.classList.add('hidden');
-        });
+        }
+      });
+    </script>
     
-        // Close modal when clicking outside
-        window.addEventListener('click', (event) => {
-          if (event.target === buttonModal) {
-            buttonModal.classList.add('hidden');
-          }
-          if (event.target === iconModal) {
-            iconModal.classList.add('hidden');
-          }
-        });
-      </script>
     <script src="script/sidebar.js"></script>
     <script src="script/resource-perfomance-mgt.js"></script>
   </body>
