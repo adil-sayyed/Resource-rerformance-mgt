@@ -615,23 +615,39 @@
                           </div>
                       
                           <!-- Slow Queries -->
-                          <div class="bg-white shadow-md rounded-lg p-4 lg:col-span-3">
-                            <h2 class="text-lg font-semibold mb-4">Slow queries</h2>
+                          <div class="bg-white border w-full h-full shadow-md lg:col-span-3">
+                            <div class="border bg-c-gray-2 rounded-tr-lg rounded-tl-lg py-2 px-4">
+                              <h2 class="text-white">Slow queries</h2>
+
+                            </div>
                             <table class="w-full text-sm">
                               <thead>
                                 <tr>
-                                  <th class="text-left">Query</th>
-                                  <th class="text-right">Count</th>
-                                  <th class="text-right">Slowest</th>
+                                  <th class="text-left pl-3 font-light py-2">Query</th>
+                                  <th class="text-right font-light py-2">Count</th>
+                                  <th class="text-right font-light pr-3 py-2">Slowest</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td class="truncate">&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;?xml version="1.0" encoding="utf-8"?&gt; app/Http/Controllers/flight.php:22</td>
-                                  <td class="text-right">345</td>
-                                  <td class="text-right">2054ms</td>
+                                  <td colspan="3"><hr class="border-t border-gray-300"></td>
+                              </tr>
+                                <tr>
+                                  <td class="truncate pl-3 py-2">&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;?xml version="1.0" encoding="utf-8"?
+                                    <br><span class="font-light">app/Http/Controllers/flight.php:22</span></td>
+                                  <td class="text-right py-2">345</td>
+                                  <td class="text-right pr-3 py-2">2054ms</td>
                                 </tr>
-                                <!-- Repeat rows as needed -->
+                                <tr>
+                                  <td colspan="3"><hr class="border-t border-gray-300"></td>
+                              </tr>
+                              <tr>
+                                <td class="truncate pl-3 py-2">&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;?xml version="1.0" encoding="utf-8"?
+                                  <br><span class="font-light">app/Http/Controllers/flight.php:22</span></td>
+                                <td class="text-right py-2">345</td>
+                                <td class="text-right pr-3 py-2">2054ms</td>
+                              </tr>
+                                
                               </tbody>
                             </table>
                           </div>
