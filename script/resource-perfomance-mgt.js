@@ -24,3 +24,25 @@ function showTab(tabId) {
     navbarTitle.textContent = activeButton.textContent; // Set the title to the clicked button's text
   }
 }
+
+function showTab(tabName) {
+  // Get all the tab buttons
+  const tabs = document.querySelectorAll('.uspr-tab-control');
+  tabs.forEach(tab => {
+      tab.classList.remove('active');  // Remove the 'active' class from all tabs
+  });
+
+  // Set the active tab
+  const activeTab = document.querySelector(`[data-tab="${tabName}"]`);
+  activeTab.classList.add('active');
+
+  // Get the "Add" button
+  const addButton = document.getElementById('serverOpen');
+  
+  // Logic to hide/show the "Add" button
+  if (tabName === 'bk-Reports') {
+      addButton.style.display = 'none';  // Hide "Add" button when "Reports" tab is clicked
+  } else if (tabName === 'bk-Settings') {
+      addButton.style.display = 'flex';  // Show "Add" button when "Settings" tab is clicked
+  }
+}
